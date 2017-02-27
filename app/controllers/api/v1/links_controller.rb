@@ -5,7 +5,7 @@ class Api::V1::LinksController < ApplicationController
       @link = Link.new link_params
       @link.user_id = current_user.id
       @link.save
-      render json: @link, status: 201
+      # render json: @link, status: 201
     else
       # @link = Link.new link_params
       # @link.save
