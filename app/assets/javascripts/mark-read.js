@@ -15,7 +15,7 @@ $(document).ready(function(){
 
     $.ajax({
       url: 'https://polar-journey-33706.herokuapp.com/api/v1/urls',
-      method: 'post',
+      method: 'POST',
       data: {url: link}
     });
   })
