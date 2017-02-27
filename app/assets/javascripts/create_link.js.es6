@@ -27,8 +27,15 @@ function getLinkData() {
 }
 
 function renderLink(link){
-  $("#links-list").append( linkHTML(link) )
+  if (typeof link === 'string'){
+  } else {
+    $("#links-list").append( linkHTML(link) )
+  }
   // clearLink();
+}
+
+function errorMessage() {
+  return "<p>URL must be valid and lead with 'http://' or 'https://' </p>"
 }
 
 function linkHTML(link) {
@@ -54,5 +61,6 @@ function clearLink() {
 }
 
 function displayFailure(failureData){
+  $("#error-messages").append( errorMessage() )
   console.log("FAILED attempt to create new Link: " + failureData.responseText);
 }
