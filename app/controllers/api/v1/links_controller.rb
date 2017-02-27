@@ -1,11 +1,18 @@
 class Api::V1::LinksController < ApplicationController
 
   def create
-    @link = Link.new link_params
-    if @link.save
+    if URI.parse(link_params["url"]).host && (params["title"] != "")
+      @link = Link.new link_params
+      @link.user_id = current_user.id
+      @link.save
       render json: @link, status: 201
     else
-      render json: @link.errors.full_messages, status: 500
+      # @link = Link.new link_params
+      # @link.save
+      flash[:failure] = "URL must be valid and lead with 'http://' or 'https://'"
+      redirect_to :login
+      # render json: @link.errors.full_messages, status: 500
+      # render links_path
     end
   end
 
