@@ -33243,7 +33243,7 @@ function createLink(event) {
 
   var link = getLinkData();
 
-  $.post("/api/v1/links", link).then(renderLink).fail(displayFailure);
+  $.post("/api/v1/links", link).then(renderLink(link)).fail(displayFailure);
 }
 
 function getLinkData() {
@@ -33266,7 +33266,7 @@ function errorMessage() {
 
 function linkHTML(link) {
 
-  return "<div class='link' data-id='" + link.id + "' id=\"link-" + link.id + "\">\n              <p class='link-title'>" + link.title + "</p>\n              <p class='link-url'>" + link.url + "</p>\n\n              <p class=\"link_read\">\n                " + link.read + "\n              </p>\n              <p class=\"link_buttons\">\n                <button class=\"mark-read\">Mark as Read</button>\n                <button class='edit-link'>Edit</button>\n                <button class='delete-link'>Delete</button>\n              </p>\n            </div>";
+  return "<div class='link' data-id='" + link.title + "' id=\"link-" + link.title + "\">\n              <p class='link-title'>" + link.title + "</p>\n              <p class='link-url'>" + link.url + "</p>\n\n              <p class=\"link_read\">\n                " + link.read + "\n              </p>\n              <p class=\"link_buttons\">\n                <button class=\"mark-read\">Mark as Read</button>\n                <button class='edit-link'>Edit</button>\n                <button class='delete-link'>Delete</button>\n              </p>\n            </div>";
 }
 
 function clearLink() {
@@ -33285,41 +33285,44 @@ $(document).ready(function(){
   $('#links-list').on('click', 'button.mark-read', function(){
     var $this = $(this);
     var linkId = $this.parents('.link').data('id');
-    
+    var link = this.parentElement.parentElement.getElementsByTagName("p")[1].innerText
+
     $.ajax({
       url: '/api/v1/links/' + linkId,
       method: 'PATCH',
-      data: {read: true}
+      data: {read: true, url: link}
     });
+
   })
 })
 ;
 "use strict";
 
-$(document).ready(function () {
-  $("body").on("click", ".mark-as-read", markAsRead);
-});
-
-function markAsRead(e) {
-  e.preventDefault();
-
-  var $link = $(this).parents('.link');
-  var linkId = $link.data('link-id');
-
-  $.ajax({
-    type: "PATCH",
-    url: "/api/v1/links/" + linkId,
-    data: { read: true }
-  }).then(updateLinkStatus).fail(displayFailure);
-}
-
-function updateLinkStatus(link) {
-  $(".link[data-link-id=" + link.id + "]").find(".read-status").text(link.read);
-}
-
-function displayFailure(failureData) {
-  console.log("FAILED attempt to update Link: " + failureData.responseText);
-};
+// $( document ).ready(function(){
+//   $("body").on("click", ".mark-as-read", markAsRead)
+// })
+//
+// function markAsRead(e) {
+//   e.preventDefault();
+//   console.log("hmmmmmmm...")
+//   var $link = $(this).parents('.link');
+//   var linkId = $link.data('link-id');
+//
+//   $.ajax({
+//     type: "PATCH",
+//     url: "/api/v1/links/" + linkId,
+//     data: { read: true },
+//   }).then(updateLinkStatus)
+//     .fail(displayFailure);
+// }
+//
+// function updateLinkStatus(link) {
+//   $(`.link[data-link-id=${link.id}]`).find(".read-status").text(link.read);
+// }
+//
+// function displayFailure(failureData){
+//   console.log("FAILED attempt to update Link: " + failureData.responseText);
+// };
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
