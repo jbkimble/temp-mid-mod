@@ -2,7 +2,10 @@ class LinksController < ApplicationController
   def index
     redirect_to welcomes_path unless current_user
     @hot_links = Link.hot
-
+    hots = Link.top_ten_in_last_day
+    @hottest = hots.max_by{|k,v| v}[0]
+    @hots = hots.keys
+    @hots.delete(@hottest)
     @links = current_user.links unless current_user == nil
   end
 

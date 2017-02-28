@@ -13,10 +13,5 @@ $(document).ready(function(){
       data: {read: true, url: link}
     });
 
-    // $.ajax({
-    //   url: '/api/v1/hots/',
-    //   method: 'GET',
-    //   data: {url: link}
-    // });
   })
 })
