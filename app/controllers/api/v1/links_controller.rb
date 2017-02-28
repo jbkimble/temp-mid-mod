@@ -5,6 +5,7 @@ class Api::V1::LinksController < ApplicationController
       @link = Link.new link_params
       @link.user_id = current_user.id
       @link.save
+      HotReadsService.update_urls(params["url"])
       # render json: @link, status: 201
     else
       # @link = Link.new link_params

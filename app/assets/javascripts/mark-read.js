@@ -10,7 +10,7 @@ $(document).ready(function(){
     $.ajax({
       url: '/api/v1/links/' + linkId,
       method: 'PATCH',
-      data: {read: true}
+      data: {read: true, url: link}
     });
 
     $.ajax({
