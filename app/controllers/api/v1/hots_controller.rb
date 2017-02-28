@@ -1,5 +1,5 @@
 class Api::V1::HotsController < ApplicationController
   def index
-    HotReadsService.update_urls(params["url"])
+    render json: Link.top_ten_in_last_day
   end
 end

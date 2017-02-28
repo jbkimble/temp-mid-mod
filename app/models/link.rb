@@ -9,4 +9,9 @@ class Link < ApplicationRecord
       .group("links.url")
       .order('count("reads".id) DESC').limit(10)
   }
+
+  def self.top_ten_in_last_day
+    where(read: true).where(updated_at: (Time.now - 24.hours)..Time.now).group(:url).limit(10).count
+  end
+
 end
