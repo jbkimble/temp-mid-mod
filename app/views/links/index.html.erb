@@ -7,6 +7,11 @@
 <div id="error-messages">
 
 </div>
+<form id="search">
+  <label>Search:
+    <input id="searchfield">
+  </label>
+</form>
 
 <form id="new-link">
   <label>URL:
@@ -27,7 +32,11 @@
       <% if @hottest == link.url %>
       <h3 style="color:red;"> top link </h3>
       <% end %>
-      <p class='link-title'> <%= link.title %> </p>
+      <% if link.read == false %>
+      <p class='link-title' style="color:beige;"> <%= link.title %> </p>
+      <% else %>
+      <p class='link-title' style="color:green;"> <%= link.title %> </p>
+      <% end %>
       <p class='link-url'><%= link.url %></p>
 
       <p class="link_read">
@@ -35,6 +44,7 @@
       </p>
       <p class="link_buttons">
         <button class="mark-read">Mark as Read</button>
+        <button class="mark-unread">Mark as Unread</button>
         <%= link_to "Edit", edit_link_path(link), id:"edit-link"%>
         <button class='delete-link'>Delete</button>
       </p>
@@ -53,3 +63,21 @@
 <% end %>
 </ol>
 <!-- <img src="https://m.popkey.co/4c7272/QL6mJ.gif"> -->
+
+<script>
+  $("#searchfield").on('keyup', function() {
+   var filter = this.value.toUpperCase();
+   var searchable = $('.link')
+   for (i = 0; i < searchable.length; i++) {
+    td = searchable[i].getElementsByClassName('link-url')[0]
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        searchable[i].style.display = "";
+      } else {
+        searchable[i].style.display = "none";
+      }
+    }
+  }
+  });
+
+</script>
