@@ -15,7 +15,7 @@ function createLink (event){
   var link = getLinkData();
 
   $.post("/api/v1/links", link)
-   .then( renderLink )
+   .then( renderLink(link) )
    .fail( displayFailure )
  }
 
@@ -40,7 +40,7 @@ function errorMessage() {
 
 function linkHTML(link) {
 
-    return `<div class='link' data-id='${link.id}' id="link-${link.id}">
+    return `<div class='link' data-id='${link.title}' id="link-${link.title}">
               <p class='link-title'>${ link.title }</p>
               <p class='link-url'>${ link.url }</p>
 
