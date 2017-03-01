@@ -14,10 +14,8 @@ class LinksController < ApplicationController
     if URI.parse(link_params["url"]).host
       @link.update(link_params)
       @link.save
-      flash[:success] = "Link was successfully updated"
       redirect_to '/'
     else
-      flash[:failure] = "Link failed to update. URL must be valid and lead with 'http://' or 'https://'"
       redirect_to '/'
     end
   end
@@ -30,6 +28,5 @@ class LinksController < ApplicationController
 
   def link_params
     params.require(:link).permit(:title, :url)
-
   end
 end

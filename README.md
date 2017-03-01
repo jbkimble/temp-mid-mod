@@ -1,4 +1,21 @@
 # URLockBox
+Url Lockbox is our final assesment for Turing School.  See the bottom of this read me for the original assignment.
+
+# Funcitonality
+This app allows you to store urls, mark them as read, and get data on the top urls over the last 24 hours
+
+# Setup
+```
+  $ git clone [repo]
+  $ cd [project name]
+  $ bundle
+  $ rake db:create db:migrate db:seed
+  $ rails s   <-starts server
+```
+# ScreenCast Link
+  [App ScreenCast](https://www.youtube.com/watch?v=fAV_YRy1zgc&feature=youtu.be)
+
+# URLockBox
 
 ## MidModule Assessment
 
