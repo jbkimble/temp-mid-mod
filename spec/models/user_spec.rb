@@ -7,7 +7,6 @@ RSpec.describe User, type: :model do
     expect(user).to respond_to(:links)
     end
 
-
   context 'valid attributes' do
     it 'is valid with all attributes' do
       user = User.create(email: "test@gmail.com", password: "123", password_digest: "123")
